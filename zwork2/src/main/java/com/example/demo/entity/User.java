@@ -11,11 +11,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-
 @Getter
 @Setter
 @Table(name= "user")
-
 public class User {
 	
 	@Id
@@ -29,6 +27,6 @@ public class User {
 	@Column
 	private String address;
 	@Column
-	private String tell;
+	private String tel;
 	
 }

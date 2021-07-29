@@ -53,7 +53,7 @@ public class DemoController {
 	@PostConstruct
 	public void unit() {
 		User user1 = new User();
-		user1.setName("kevin");
+		user1.set
 		
 	}
 	
