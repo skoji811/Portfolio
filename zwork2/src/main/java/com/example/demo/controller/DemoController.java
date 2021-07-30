@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,37 +24,37 @@ public class DemoController {
 	UserRepository userRepository;
 	
 	@GetMapping()
-	public String list(Model model) {
+	public String list(Model model,BindingResult result) {
 		List<User> list = userRepository.findAll();
 		model.addAttribute("data",list);
 		return "users/list";
 	}
 	
 	@GetMapping("/add")
-	public String add(Model model) {
+	public String add(Model model,BindingResult result) {
 		User data = new User();
 		model.addAttribute("formModel",data);
 		return "users/new";
 	}
 	
 	@GetMapping("/edit")
-		public String edit(@RequestParam int id,Model model){
+		public String edit(@RequestParam int id,Model model,BindingResult result){
 		User data = userRepository.findById(id);
 		model.addAttribute("formModel",data);
 		return "users/new";
 	}
 	
-	@PostMapping
+	@PostMapping()
 	@Transactional(readOnly = false)
 	public String save (
-			@ModelAttribute("formModel") User user){
+			@ModelAttribute("formModel") User user,Model model,BindingResult result){
 				userRepository.saveAndFlush(user);
 				return "redirect:users/list";
 			}
 	
 	@PostMapping("/delete")
 	@Transactional(readOnly = false)
-	public String delete(@RequestParam int id) {
+	public String delete(@RequestParam int id,Model model,BindingResult result) {
 		userRepository.deleteById(id);
 		return "redirect:users/list";
 	}
