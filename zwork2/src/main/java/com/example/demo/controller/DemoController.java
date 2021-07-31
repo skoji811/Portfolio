@@ -24,21 +24,21 @@ public class DemoController {
 	UserRepository userRepository;
 	
 	@GetMapping()
-	public String list(Model model,BindingResult result) {
+	public String list(Model model) {
 		List<User> list = userRepository.findAll();
 		model.addAttribute("data",list);
 		return "users/list";
 	}
 	
 	@GetMapping("/add")
-	public String add(Model model,BindingResult result) {
+	public String add(Model model) {
 		User data = new User();
 		model.addAttribute("formModel",data);
 		return "users/new";
 	}
 	
 	@GetMapping("/edit")
-		public String edit(@RequestParam int id,Model model,BindingResult result){
+		public String edit(@RequestParam int id,Model model){
 		User data = userRepository.findById(id);
 		model.addAttribute("formModel",data);
 		return "users/new";
@@ -54,7 +54,7 @@ public class DemoController {
 	
 	@PostMapping("/delete")
 	@Transactional(readOnly = false)
-	public String delete(@RequestParam int id,Model model,BindingResult result) {
+	public String delete(@RequestParam int id,Model model) {
 		userRepository.deleteById(id);
 		return "redirect:users/list";
 	}
@@ -66,6 +66,12 @@ public class DemoController {
 		user1.setAddress("柏原市高井田");
 		user1.setTel("08061644280");
 		userRepository.saveAndFlush(user1);
+		
+		User user2 = new User();
+		user2.setName("榊原孝司");
+		user2.setAddress("柏原市高井田");
+		user2.setTel("08061644280");
+		userRepository.saveAndFlush(user2);
 		
 	}
 	
