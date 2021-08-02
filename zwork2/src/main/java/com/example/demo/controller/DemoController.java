@@ -58,6 +58,8 @@ public class DemoController {
 		return "redirect:users/list";
 	}
 	
+
+	
 	@PostConstruct
 	public void unit() {
 		User user1 = new User();
