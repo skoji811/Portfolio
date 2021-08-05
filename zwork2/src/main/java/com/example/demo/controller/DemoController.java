@@ -20,11 +20,11 @@ import com.example.demo.repository.UserRepository;
 public class DemoController {
 
 	@Autowired
-	UserRepository userRepository;
+	UserRepository repository;
 	
 	@GetMapping()
 	public String list(Model model) {
-		List<User> list = userRepository.findAll();
+		List<User> list = repository.findAll();
 		model.addAttribute("data",list);
 		return "users/list";
 	}
@@ -38,7 +38,7 @@ public class DemoController {
 	
 	@GetMapping("/edit")
 		public String edit(@RequestParam int id,Model model){
-		User data = userRepository.findById(id);
+		User data = repository.findById(id);
 		model.addAttribute("formModel",data);
 		return "users/new";
 	}
@@ -46,16 +46,16 @@ public class DemoController {
 	@PostMapping()
 	@Transactional(readOnly = false)
 	public String save (
-			@ModelAttribute("formModel") User user,Model model){
-				userRepository.saveAndFlush(user);
-				return "redirect:users/list";
+			@ModelAttribute("formModel") User user){
+		repository.saveAndFlush(user);
+				return "redirect:/list";
 			}
 	
 	@PostMapping("/delete")
 	@Transactional(readOnly = false)
-	public String delete(@RequestParam int id,Model model) {
-		userRepository.deleteById(id);
-		return "redirect:users/list";
+	public String delete(@RequestParam int id) {
+		repository.deleteById(id);
+		return "redirect:/list";
 	}
 	
 
@@ -66,13 +66,13 @@ public class DemoController {
 		user1.setName("榊原孝司");
 		user1.setAddress("柏原市高井田");
 		user1.setTel("08061644280");
-		userRepository.saveAndFlush(user1);
+		repository.saveAndFlush(user1);
 		
 		User user2 = new User();
 		user2.setName("榊原孝司");
 		user2.setAddress("柏原市高井田");
 		user2.setTel("08061644280");
-		userRepository.saveAndFlush(user2);
+		repository.saveAndFlush(user2);
 		
 	}
 	
