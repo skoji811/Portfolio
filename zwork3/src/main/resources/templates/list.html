@@ -16,13 +16,15 @@ table {
 <h1>住所録</h1>
 <table border="1">
     <tr>
-        <th class="col_name">名前</th>
-        <th class="col_address">住所</th>
-        <th class="col_tel">電話番号</th>
+        <th class="col_create_date">作成日</th>
+        <th class="col_title">タイトル</th>
+        <th class="col_create_user">作成者</th>
+        <th></th>
         <th></th>
         <th></th>
     </tr>
     <tr th:each="obj : ${data}">
+        <td th:text="${obj.date}">
         <td th:text="${obj.name}"></td>
         <td th:text="${obj.address}"></td>
         <td th:text="${obj.tel}"></td>

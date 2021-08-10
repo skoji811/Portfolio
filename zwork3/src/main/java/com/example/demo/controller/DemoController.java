@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,27 +30,30 @@ public class DemoController {
 	@GetMapping("/add")
 	public String add(Model model) {
 		BulletinBoard data = new BulletinBoard();
-		model.addAttribute("formModel", data);
+		model.addAttribute("bbs", data);
 		return "new";
 	}
 	
 	@GetMapping("/edit")
 	public String edit (@RequestParam int id ,Model model) {
 		BulletinBoard data = dRepos.findById(id);
-		model.addAttribute("formModel", data);
+		model.addAttribute("bbs", data);
 			return "new";
 	}
 	
 	@GetMapping("/show")
 	public String show (@RequestParam int id ,Model model){
 		BulletinBoard data = dRepos.findById(id);
-		model.addAttribute("formModel", data);
+		model.addAttribute("bbs", data);
 			return "show";
 	}
 	
-	@PostMapping()
+	@PostMapping("/create")
 	@Transactional(readOnly = false)
-	public String save(@ModelAttribute("formModel")BulletinBoard bb) {
+	public String save(@ModelAttribute("bbs")BulletinBoard bb) {
+		Date date = new Date();
+		SimpleDateFormat sdf1 =new SimpleDateFormat("yyyy/MM/dd");
+		bb.setCreateDate(sdf1.format(date));
 		dRepos.saveAndFlush(bb);
 		return "redirect:list";
 	}
