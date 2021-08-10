@@ -42,6 +42,7 @@ public class DemoController {
 		model.addAttribute("formModel",data);
 		return "users/new";
 	}
+
 	
 	@PostMapping()
 	@Transactional(readOnly = false)
@@ -65,13 +66,13 @@ public class DemoController {
 		User user1 = new User();
 		user1.setName("榊原孝司");
 		user1.setAddress("柏原市高井田");
-		user1.setTel("08061644280");
+		user1.setTel("123456789");
 		repository.saveAndFlush(user1);
 		
 		User user2 = new User();
 		user2.setName("榊原孝司");
 		user2.setAddress("柏原市高井田");
-		user2.setTel("08061644280");
+		user2.setTel("123456789");
 		repository.saveAndFlush(user2);
 		
 	}

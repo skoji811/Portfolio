@@ -4,8 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.BulletinBoard;
 import com.example.demo.repository.DemoReposiroty;
@@ -13,10 +17,10 @@ import com.example.demo.repository.DemoReposiroty;
 @Controller
 public class DemoController {
 
-	@Autowired DemoReposiroty DRepos;
+	@Autowired DemoReposiroty dRepos;
 	@GetMapping
 	public String list(Model model) {
-		List<BulletinBoard> list = DRepos.findAll();
+		List<BulletinBoard> list = dRepos.findAll();
 		model.addAttribute("data", list);
 		return "list";
 	}
@@ -26,7 +30,34 @@ public class DemoController {
 		BulletinBoard data = new BulletinBoard();
 		model.addAttribute("formModel", data);
 		return "new";
-		
+	}
+	
+	@GetMapping("/edit")
+	public String edit (@RequestParam int id ,Model model) {
+		BulletinBoard data = dRepos.findById(id);
+		model.addAttribute("formModel", data);
+			return "new";
+	}
+	
+	@GetMapping("/show")
+	public String show (@RequestParam int id ,Model model){
+		BulletinBoard data = dRepos.findById(id);
+		model.addAttribute("formModel", data);
+			return "show";
+	}
+	
+	@PostMapping()
+	@Transactional(readOnly = false)
+	public String save(@ModelAttribute("formModel")BulletinBoard bb) {
+		dRepos.saveAndFlush(bb);
+		return "redirect:list";
+	}
+	
+	@PostMapping("/delete")
+	@Transactional(readOnly = false)
+	public String delete(@RequestParam int id) {
+		dRepos.deleteById(id);
+		return "redirect:list";
 		
 	}
 	
