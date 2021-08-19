@@ -45,7 +45,7 @@ public class DemoController {
 
 	
 	@PostMapping
-	
+	@Transactional(readOnly = false)
 	public String save (
 			@ModelAttribute("formModel") User user){
 		repository.saveAndFlush(user);
@@ -53,9 +53,10 @@ public class DemoController {
 			}
 	
 	@PostMapping("/delete")
+	@Transactional(readOnly = false)
 	public String delete(@RequestParam int id) {
 		repository.deleteById(id);
-		return "redirect:list";
+		return "redirect:users/list";
 	}
 	
 
