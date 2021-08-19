@@ -1,10 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<meta charset="UTF-8"></meta>
+<title>INDEXページ</title>
 </head>
 <body>
-
+<div>
+<form method="post" action="/insert" th:object="${formInsert}">
+<p>Insert</p>
+<input type="text" name="name" size="50" placeholder="名前"></input>
+<input type="text" name="age" size="50" placeholder="年齢"></input>
+<input type="submit" value="Insert"></input>
+</form>
+</div>
+<div>
+<form method="post" action="/update" th:object="${formUpdate}">
+<p>Update</p>
+<input type="text" name="id" size="50" placeholder="ID"></input>
+<input type="text" name="name" size="50" placeholder="名前"></input>
+<input type="text" name="age" size="50" placeholder="年齢"></input>
+<input type="submit" value="Update"></input>
+</form>
+</div>
+<div>
+<form method="post" action="/delete" th:object="${formDelete}">
+<p>Delete</p>
+<input type="text" name="id" size="50" placeholder="ID"></input>
+<input type="submit" value="Delete"></input>
+</form>
+</div>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>名前</th>
+<th>年齢</th>
+</tr>
+</thead>
+<tbody>
+<tr th:each="data:${data}">
+<td th:text="${data.id}"></td>
+<td th:text="${data.name}"></td>
+<td th:text="${data.age}"></td>
+</tr>
+</tbody>
+</table>
 </body>
 </html>

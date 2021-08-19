@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"></meta>
+<title>更新ページ</title>
+</head>
+<body>
+
+<div>
+<form method="post" action="/edit" th:object="${form}">
+<p>Update</p>
+<input type="text" name="id" size="50" placeholder="ID"></input>
+<input type="text" name="name" size="50" placeholder="名前"></input>
+<input type="text" name="age" size="50" placeholder="年齢"></input>
+<input type="submit" value="更新"></input>
+</form>
+</div>
+<div>
+
+</div>
+
+</body>
+</html>

@@ -26,37 +26,37 @@ public class DemoController {
 	public String list(Model model) {
 		List<User> list = repository.findAll();
 		model.addAttribute("data",list);
-		return "users/list";
+		return "list";
 	}
 	
 	@GetMapping("/add")
 	public String add(Model model) {
 		User data = new User();
 		model.addAttribute("formModel",data);
-		return "users/new";
+		return "new";
 	}
 	
 	@GetMapping("/edit")
 		public String edit(@RequestParam int id,Model model){
 		User data = repository.findById(id);
 		model.addAttribute("formModel",data);
-		return "users/new";
+		return "new";
 	}
 
 	
-	@PostMapping()
+	@PostMapping
 	@Transactional(readOnly = false)
 	public String save (
 			@ModelAttribute("formModel") User user){
 		repository.saveAndFlush(user);
-				return "redirect:users/list";
+				return "list";
 			}
 	
 	@PostMapping("/delete")
 	@Transactional(readOnly = false)
 	public String delete(@RequestParam int id) {
 		repository.deleteById(id);
-		return "redirect:users/list";
+		return "list";
 	}
 	
 
