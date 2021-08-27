@@ -26,21 +26,21 @@ public class DemoController {
 	public String list(Model model) {
 		List<User> list = repository.findAll();
 		model.addAttribute("data",list);
-		return "list";
+		return "users/list";
 	}
 	
 	@GetMapping("/add")
 	public String add(Model model) {
 		User data = new User();
 		model.addAttribute("formModel",data);
-		return "new";
+		return "users/new";
 	}
 	
 	@GetMapping("/edit")
 		public String edit(@RequestParam int id,Model model){
 		User data = repository.findById(id);
 		model.addAttribute("formModel",data);
-		return "new";
+		return "users/new";
 	}
 
 	
@@ -49,14 +49,14 @@ public class DemoController {
 	public String save (
 			@ModelAttribute("formModel") User user){
 		repository.saveAndFlush(user);
-				return "redirect:/list";
+				return "redirect:/";
 			}
 	
 	@PostMapping("/delete")
 	@Transactional(readOnly = false)
 	public String delete(@RequestParam int id) {
 		repository.deleteById(id);
-		return "redirect:users/list";
+		return "redirect:/";
 	}
 	
 
@@ -64,14 +64,14 @@ public class DemoController {
 	@PostConstruct
 	public void unit() {
 		User user1 = new User();
-		user1.setName("榊原孝司");
-		user1.setAddress("柏原市高井田");
+		user1.setName("satoshi");
+		user1.setAddress("大阪");
 		user1.setTel("123456789");
 		repository.saveAndFlush(user1);
 		
 		User user2 = new User();
-		user2.setName("榊原孝司");
-		user2.setAddress("柏原市高井田");
+		user2.setName("koji");
+		user2.setAddress("東京");
 		user2.setTel("123456789");
 		repository.saveAndFlush(user2);
 		

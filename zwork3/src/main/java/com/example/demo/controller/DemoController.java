@@ -20,6 +20,7 @@ import com.example.demo.repository.DemoReposiroty;
 public class DemoController {
 
 	@Autowired DemoReposiroty dRepos;
+	
 	@GetMapping
 	public String list(Model model) {
 		List<BulletinBoard> list = dRepos.findAll();
@@ -53,7 +54,7 @@ public class DemoController {
 	public String save(@ModelAttribute("bbs")BulletinBoard bb) {
 		Date date = new Date();
 		SimpleDateFormat sdf1 =new SimpleDateFormat("yyyy/MM/dd");
-		bb.setCreateDate(sdf1.format(date));
+		dRepos.setCreateDate(sdf1.format(date));
 		dRepos.saveAndFlush(bb);
 		return "redirect:list";
 	}
