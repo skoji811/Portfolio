@@ -52,18 +52,17 @@ public class DemoController {
 	@PostMapping("/create")
 	@Transactional(readOnly = false)
 	public String save(@ModelAttribute("bbs")BulletinBoard bb) {
-		Date date = new Date();
-		SimpleDateFormat sdf1 =new SimpleDateFormat("yyyy/MM/dd");
-		dRepos.setCreateDate(sdf1.format(date));
+
+		bb.setCreateDate(new Date());
 		dRepos.saveAndFlush(bb);
-		return "redirect:list";
+		return "redirect:/";
 	}
 	
 	@PostMapping("/delete")
 	@Transactional(readOnly = false)
 	public String delete(@RequestParam int id) {
 		dRepos.deleteById(id);
-		return "redirect:list";
+		return "redirect:/";
 		
 	}
 	
