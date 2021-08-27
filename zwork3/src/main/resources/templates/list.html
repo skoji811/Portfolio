@@ -24,7 +24,7 @@ table {
         <th></th>
     </tr>
     <tr th:each="obj : ${data}">
-        <td th:text="${obj.date}">
+        <td th:text="${#dates.format(obj.date,'yyyy/mm/dd')}">
         <td th:text="${obj.name}"></td>
         <td th:text="${obj.address}"></td>
         <td th:text="${obj.tel}"></td>
