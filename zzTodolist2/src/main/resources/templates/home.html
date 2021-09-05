@@ -5,6 +5,15 @@
   <title>SpringTodoList</title>
 </head>
 <body>
+<div class="create-todo">
+    <form method="POST" th:action="@{/}" th:object="${todo}">
+      <p th:errors="*{content}" class="todo-error-message"></p>
+      <input type="text" th:field="*{content}">
+      <button type="submit">登録</button>
+</form>
+</div>
+
+
   <div th:each="todo : ${allTodo}">
     <p th:text="${todo.content}"></p>
   </div>
