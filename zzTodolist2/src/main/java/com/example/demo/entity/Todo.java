@@ -24,6 +24,9 @@ public class Todo {
 	private String content;
 	
 	private boolean done;
+
+
+	}
 	
 
-}
+
