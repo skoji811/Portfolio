@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>日付計算アプリ　ホーム画面</title>
+</head>
+<body>
+<h1>日付を入力してください</h1>
+<form method="post" th:action="@{/calc}">
+<label>基準日付:<input type="date" name="inputdate" value="2021-09-01" max="9999-12-31"required><br>
+<button>計算実行</button><br>
+</label>
+</form>
+
+<a th:href="@{/register}">
+<button>新規登録画面へ</button>
+</a>
+
+<p th:if="${inputdate} == null"></p>
+<p th:unless="${inputdate} == null"><span th:text="${inputdate}"></span>
+
+<table border=1 align="left">
+<thead>
+<tr>
+<th>ID</th>
+<th>名前</th>
+<th>加減年</th>
+<th>加減月</th>
+<th>加減日</th>
+<th>計算結果（MAP)</th>
+<th>更新</th>
+<th>削除</th>
+</tr>
+</thead>
+
+<tbody th:each="dateCalc:${dateCalc}" th:object="${dateCalc}">
+<tr>
+<td th:text="*{id}"></td>
+<td th:text="*{name}"></td>
+<td th:text="*{plusyear}"></td>
+<td th:text="*{plusmonth}"></td>
+<td th:text="*{plusday}"></td>
+<td th:text="${resultdateMap.get(__*{id}__)}"></td>
+<td><a th:href="@{/update/id/={id}(id=*{id})}"><button>更新</button></a></td>
+<td><form method="post" th:action="@{/delete/id={id}(id=*{id})}"><button>削除</button></form></td>
+</tr>
+</tbody>
+</table>
+<table border=1>
+<thead>
+<tr>
+<th>計算結果</th>
+</tr>
+</thead>
+<tbody th:each="resultdateArray:${resuletdateArray}">
+<tr>
+<td th:text="${resultdateArray}"></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>
