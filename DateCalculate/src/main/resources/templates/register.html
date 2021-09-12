@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>日付計算アプリ　【登録】</title>
+<link th:heref="@{/css/style.css}" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+</body>
+<h1>新規登録する加減算式を入力してください</h1>
+<form method="post" th:action="@{/register}" th:object="${dateCalc}">
+<table border=1>
+<thead>
+<tr>
+<th>計算式名</th>
+<th>加減年</th>
+<th>加減月</th>
+<th>加減日</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><input type="text" th:field="*{name}" placeholder="任意の文字"><br>
+<span class="form error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span></td>
+<td><input type="text" th:field="*{plusyear}" placeholder="半角数字"><br>
+<span class="form error" th:if="${#fields.hasErrors('plusyear')}" th:errors="*{name}"></span></td>
+<td><input type="text" th:field="*{plusmonth}" placeholder="半角数字"><br>
+<span class="form error" th:if="${#fields.hasErrors('plusmonth')}" th:errors="*{name}"></span></td>
+<td><input type="text" th:field="*{plusday}" placeholder="半角数字"><br>
+<span class="form error" th:if="${#fields.hasErrors('plusday')}" th:errors="*{name}"></span></td>
+
+</tr>
+
+</tbody>
+ </table>
+ <button>新規登録</button>
+ </form>
+</html>
