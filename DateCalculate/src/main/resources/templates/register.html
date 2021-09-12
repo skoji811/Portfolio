@@ -25,11 +25,11 @@
 <td><input type="text" th:field="*{name}" placeholder="任意の文字"><br>
 <span class="form error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span></td>
 <td><input type="text" th:field="*{plusyear}" placeholder="半角数字"><br>
-<span class="form error" th:if="${#fields.hasErrors('plusyear')}" th:errors="*{name}"></span></td>
+<span class="form error" th:if="${#fields.hasErrors('plusyear')}" th:errors="*{name}">入力値エラー</span></td>
 <td><input type="text" th:field="*{plusmonth}" placeholder="半角数字"><br>
-<span class="form error" th:if="${#fields.hasErrors('plusmonth')}" th:errors="*{name}"></span></td>
+<span class="form error" th:if="${#fields.hasErrors('plusmonth')}" th:errors="*{name}">入力値エラー</span></td>
 <td><input type="text" th:field="*{plusday}" placeholder="半角数字"><br>
-<span class="form error" th:if="${#fields.hasErrors('plusday')}" th:errors="*{name}"></span></td>
+<span class="form error" th:if="${#fields.hasErrors('plusday')}" th:errors="*{name}">入力値エラー</span></td>
 
 </tr>
 
